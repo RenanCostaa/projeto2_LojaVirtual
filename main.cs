@@ -37,6 +37,17 @@ using System;
 
 class MainClass {
   public static void Main (string[] args) {
+    Console.WriteLine("------ Loja Virtual ------ \n------ Menu de Opções ------");
+    Console.WriteLine("\n 1 - Cadastro de Usuário \n 2 - Realizar compra");
+    Console.Write("\nSelecione a opção desejada:");
+    int opt=int.Parse(Console.ReadLine());
 
+    if(opt=1){
+      //chamar cadastro de usuario
+    }else{
+      if(opt=2){
+        //iniciar compra de prods
+      }
+    }
   }
 }
