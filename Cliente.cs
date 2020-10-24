@@ -1,10 +1,12 @@
 class Cliente{
   
+  //atributos
   string nome;
   string cpf;
   string endereco;
   string telefone;
 
+  //getters
   public string getNome(){
     return nome;
   }
@@ -18,15 +20,14 @@ class Cliente{
     return telefone;
   }
 
+  //setters
   // não tenho certeza se precisamos de SET p/ nome e/ou cpf
-  /*
   void setNome(string n){
     nome=n;
   }
   void setCpf(string c){
     cpf=c;
   }
-  */
   void setEndr(string e){
     endereco=e;
   }
@@ -34,6 +35,9 @@ class Cliente{
     telefone=t;
   }
 
+  //construtores
+  public Cliente(){}
+  /*
   public Cliente(string n){
     nome=n;
   }
@@ -46,6 +50,7 @@ class Cliente{
     cpf=c;
     endereco=e;
   }
+  */
   public Cliente(string n, string c, string e, string t){
     nome=n;
     cpf=c;
