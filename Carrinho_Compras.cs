@@ -11,34 +11,15 @@ class Carrinho_Compras{
   public string getDono(){
     return dono;
   }
-	/*PASSADO PARA A CLASSE LOJA
-  public string getItens(){
-    return itens;
-  }
-  public int getQuant(){
-    return quant_carrinho;
-  }*/
 
   //setters
   void setDono(string d){
     dono=d;
   }
-	/*PASSADO PARA A CLASSE LOJA
-  void setItens(string i){
-    itens=i;
-  }
-  void setQuant(int q){
-    quant_carrinho=q;
-  }*/
 
   //contrutores
-  //public Carrinho_Compras(string d, string i, int q){
 	public Carrinho_Compras(string d) {
     dono=d;
-    /*PASSADO PARA A CLASSE LOJA
-		itens=i;
-    quant_carrinho=q;
-		*/
   }
 
   //metodos

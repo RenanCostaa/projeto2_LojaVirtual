@@ -42,21 +42,6 @@ class Loja{
     preco = p;
   }
   
-	/*
-  //atributos
-  string produto;
-  double quantidade;
-  double preco;
-
-  //construtores
-  public Loja(){
-  }
-  public Loja(string prod, double quant, double preco){
-    produto=prod;
-    quantidade=quant;
-    this.preco=preco;
-  }
-	*/
   //metodos
 
 }

@@ -21,7 +21,6 @@ class Cliente{
   }
 
   //setters
-  // não tenho certeza se precisamos de SET p/ nome e/ou cpf
   void setNome(string n){
     nome=n;
   }
