@@ -4,8 +4,9 @@ using System.Collections.Generic;
 class Carrinho_Compras{
   //atributos
   string dono;
-	List<int> produtos;
-	List<int> qtd;
+	/*List<int> produtos;
+	List<int> qtd;*/
+	public List<Loja> prodsCarrinho;
 
   //getters
   public string getDono(){
@@ -20,19 +21,16 @@ class Carrinho_Compras{
   //contrutores
 	public Carrinho_Compras(string d) {
     dono=d;
+    prodsCarrinho = new List<Loja>();
   }
 
   //metodos
-  public static bool addCarrinho(int cod, int qtd, int estoq){
-    if (qtd<=estoq) {
-      //Console.WriteLine("aprovado");
-      return true;
-		}
-    else{
-      //Console.WriteLine("negado");
-      return false;
-    }
-  }
+  /*public void addCarrinho(int cod, int quantd){
+    produtos.Add(cod);
+    qtd.Add(quantd);
+    Console.WriteLine("feito");
+  }*/
+
 
 
 }

@@ -41,6 +41,7 @@ class MainClass {
   public static void Main (string[] args) {
 		int opt, cod, qtd;
 		string nome, cpf, endereco, telefone;
+		double valorProdCarrinho;
 
 		//iniciando o estoque
 
@@ -56,7 +57,7 @@ class MainClass {
 		}
 		
     Console.WriteLine("\n\nOlá! Para começarmos, faça seu cadastro:\n\n");
-
+    /*
     //chamar cadastro de usuario
     Console.Write("Digite o seu nome >> ");
     nome = Console.ReadLine();
@@ -67,31 +68,54 @@ class MainClass {
     Console.Write("Digite o seu Telefone >> ");
     telefone = Console.ReadLine();
     Cliente novoCliente = new Cliente(nome, cpf, endereco, telefone);
+    */
+    
+    //Carrinho_Compras novoCarrinho = new Carrinho_Compras(novoCliente.getNome());
+    Carrinho_Compras novoCarrinho = new Carrinho_Compras("renan");
 
-    Carrinho_Compras novoCarrinho = new Carrinho_Compras(novoCliente.getNome());
-
-    Console.WriteLine("\n\nSeja bem-vindo(a) à nossa loja, {0}.\nConfira os nossos produtos:\n\n", novoCliente.getNome());
+    //Console.WriteLine("\n\nSeja bem-vindo(a) à nossa loja, {0}.\nConfira os nossos produtos:\n\n", novoCliente.getNome());
+    Console.WriteLine("\n\nSeja bem-vindo(a) à nossa loja,.\nConfira os nossos produtos:\n\n");
     
     //vitrine de produtos
     string continuar = "s";
     while (continuar == "s") {
-      Console.WriteLine("*********************PRODUTOS***********************\n**Cód...Nome.................................Preço**");
+      Console.WriteLine("*********************PRODUTOS***********************\n");
+      Console.WriteLine("Cód...Nome.................................Preço");
 			
       for (int i=0; i<produtos.Count; i++){
-        Console.WriteLine("**{0} - {1} - R${2} **", i+1, produtos[i].getProduto(),produtos[i].getEstoque(),produtos[i].getPreco());
+        Console.WriteLine("Cod {0} - {1} - R${2} - Qtd.: {3} ", i+1, produtos[i].getProduto(),produtos[i].getPreco());
       }
+      //selecao de item e quantidade
 
+      /*Temos que limitar o numero escolhido pelo usuário para
+      selecionar o produto (que tem o limite de 50 codigos) */
+      
       Console.Write("\n\nEscolha um produto através do código >> ");
       cod= int.Parse(Console.ReadLine())-1;
-      Console.Write("Digite a quantidade desejada >> ");
-      qtd= int.Parse(Console.ReadLine());
 
+			Loja produtoCarrinho = new Loja();
 
-      Carrinho_Compras.addCarrinho(cod,qtd,produtos[cod].getEstoque());
+      if(cod>=0 && cod<=50) {
+				Console.Write("Digite a quantidade desejada >> ");
+				qtd= int.Parse(Console.ReadLine());
+				if (qtd <= produtos[cod].getEstoque()) {
+					valorProdCarrinho = produtos[cod].getPreco() * qtd;
+          produtoCarrinho = new Loja(produtos[cod].getProduto(), qtd, valorProdCarrinho);
+					novoCarrinho.prodsCarrinho.Add(produtoCarrinho);
+				} else {
+					Console.WriteLine("Quantidade não disponível!");
+				}
+			} else {
+				Console.WriteLine("Código digitado não existe!");
+			}
 
-      Console.Write("\n\nDeseja escolher mais produtos? 's' para escolher, 'n' para finalizar o pedido >> ");
+      Console.Write("\n\nDeseja escolher mais produtos? (s/n)");
       continuar = Console.ReadLine();
     }
+
+		for (int i=0; i<novoCarrinho.prodsCarrinho.Count; i++){
+			Console.WriteLine("Prod {0} - {1} - R${2} ", i+1, novoCarrinho.prodsCarrinho[i].getProduto(),novoCarrinho.prodsCarrinho[i].getPreco());
+		}
 
   }
 }
