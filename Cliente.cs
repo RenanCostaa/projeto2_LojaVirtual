@@ -16,7 +16,7 @@ class Cliente{
   public string getEndr(){
     return endereco;
   }
-  public string gerTel(){
+  public string getTel(){
     return telefone;
   }
 
@@ -36,7 +36,7 @@ class Cliente{
   }
 
   //construtores
-  public Cliente(){}
+  //public Cliente(){}
   /*
   public Cliente(string n){
     nome=n;

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 /* 
 
   https://drive.google.com/file/d/1aS4HaJdxtWxOzoRdpRRbO8_mgjZdaopl/view
@@ -37,17 +39,73 @@ using System;
 
 class MainClass {
   public static void Main (string[] args) {
-    Console.WriteLine("------ Loja Virtual ------ \n------ Menu de Opções ------");
-    Console.WriteLine("\n 1 - Cadastro de Usuário \n 2 - Realizar compra");
-    Console.Write("\nSelecione a opção desejada:");
-    int opt=int.Parse(Console.ReadLine());
+		int opt, cod, qtd;
+		string nome, cpf, endereco, telefone;
 
-    if(opt=1){
-      //chamar cadastro de usuario
-    }else{
-      if(opt=2){
-        //iniciar compra de prods
+		//iniciando o estoque
+		/*
+    List<Loja> produtos = new List<Loja>();
+		produtos.Add(new Loja("produto1", 10, 9.98));
+		produtos.Add(new Loja("produto2", 11, 9.99));
+		produtos.Add(new Loja("produto3", 12, 9.97));
+		produtos.Add(new Loja("produto4", 13, 9.96));
+		produtos.Add(new Loja("produto5", 15, 9.95));
+		produtos.Add(new Loja("produto6", 14, 9.94));
+		produtos.Add(new Loja("produto7", 16, 9.93));
+		produtos.Add(new Loja("produto8", 17, 9.92));
+		produtos.Add(new Loja("produto9", 18, 9.91));
+		produtos.Add(new Loja("produto10", 19, 9.90));
+		produtos.Add(new Loja("produto11", 20, 9.88));
+    */
+
+		List<string> descricao = new List<string>{"10 COLOUR SPACEBOY PEN","SET/10 BLUE POLKADOT PARTY CANDLES","POTTING SHED SOW \'N\' GROW SET","PAPERWEIGHT KINGS CHOICE ","WOVEN BERRIES CUSHION COVER ","WHITE/PINK MINI CRYSTALS NECKLACE","SET/3 RED GINGHAM ROSE STORAGE BOX","MAGNETS PACK OF 4 VINTAGE LABELS ","WHITE CHRYSANTHEMUMS ART FLOWER","WHITE FRANGIPANI NECKLACE","SILVER FABRIC MIRROR","PINK  HONEYCOMB PAPER FAN","PINK BOUDOIR T-LIGHT HOLDER","BLACK CHERRY LIGHTS","GLASS CAKE COVER AND PLATE","DECORATION SITTING BUNNY","ANTIQUE MID BLUE FLOWER EARRINGS","VINTAGE LEAF CHOPPING BOARD  ","SNACK TRAY I LOVE LONDON","DECROTIVEVINTAGE COFFEE GRINDER BOX","IVORY ENCHANTED FOREST PLACEMAT","ANTIQUE SILVER TEA GLASS ETCHED","BLUE FELT HANGING HEART W FLOWER","PACK OF 12 COLOURED PENCILS","CLAM SHELL SMALL ","TWO DOOR CURIO CABINET","GREEN GOOSE FEATHER CHRISTMAS TREE ","MULTICOLOUR HONEYCOMB FAN","GREEN DROP EARRINGS W BEAD CLUSTER","BOTANICAL LILY GREETING CARD","SILVER DROP EARRINGS WITH FLOWER","CANDY SPOT BUNNY","WHITE WITH BLACK CATS PLATE","VEGETABLE MAGNETIC  SHOPPING LIST","FLOWER PURPLE CLOCK WITH SUCKER","VINTAGE CHRISTMAS GIFT SACK","found box","SET 10 CARDS SNOWY SNOWDROPS  17100","JUMBO SHOPPER VINTAGE RED PAISLEY","SET OF 4 ENGLISH ROSE PLACEMATS","FELTCRAFT HAIRBAND RED AND BLUE","BLUE GIANT GARDEN THERMOMETER","VINTAGE PAISLEY STATIONERY SET","SET OF 4 NAPKIN CHARMS CUTLERY","CARAVAN SQUARE TISSUE BOX","FRENCH PAISLEY CUSHION COVER ","GOLD FISHING GNOME","PINK BABY BUNTING","DROP DIAMANTE EARRINGS CRYSTAL","RED FLOCK LOVE HEART PHOTO FRAME"};
+    
+    List<double> preco = new List<double>{10.65,9.13,0.66,175.69,15.5,206.4,194.7,3.26,2019.05,109.19,404.49,157.08,183.2,124.87,888.42,736.38,0.84,0.07,2.4,24.96,9.72,160.0,18.62,14.75,2.82,10.2,29.74,19.96,80.46,183.09,152.19,49.13,8.0,138.46,135.08,2.41,10.82,425.14,2028.25,5.13,20.38,5.76,199.33,192.44,2.62,201.84,170.92,0.0,0.87,537.83};
+
+		List<int> estoque = new List<int>{123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123,123};
+
+		List<Loja> produtos = new List<Loja>();
+		for (int i=0; i<descricao.Count; i++) {
+			produtos.Add(new Loja(descricao[i], estoque[i], preco[i]));
+		}
+		
+    Console.WriteLine("\n\nOlá! Para começarmos, faça seu cadastro:\n\n");
+
+    //chamar cadastro de usuario
+    Console.Write("Digite o seu nome >> ");
+    nome = Console.ReadLine();
+    Console.Write("Digite o seu CPF >> ");
+    cpf = Console.ReadLine();
+    Console.Write("Digite o seu Endereço >> ");
+    endereco = Console.ReadLine();
+    Console.Write("Digite o seu Telefone >> ");
+    telefone = Console.ReadLine();
+    Cliente novoCliente = new Cliente(nome, cpf, endereco, telefone);
+
+    Carrinho_Compras novoCarrinho = new Carrinho_Compras(novoCliente.getNome());
+
+    Console.WriteLine("\n\nSeja bem-vindo(a) à nossa loja, {0}.\nConfira os nossos produtos:\n\n", novoCliente.getNome());
+    
+    //vitrine de produtos
+    string continuar = "s";
+    while (continuar == "s") {
+      Console.WriteLine("*********************PRODUTOS***********************\n**Cód...Nome.................................Preço**");
+			
+      for (int i=0; i<produtos.Count; i++){
+        Console.WriteLine("**{0} - {1} - R${2} **", i+1, produtos[i].getProduto(),produtos[i].getEstoque(),produtos[i].getPreco());
       }
+
+      Console.Write("\n\nEscolha um produto através do código >> ");
+      cod= int.Parse(Console.ReadLine())-1;
+      Console.Write("Digite a quantidade desejada >> ");
+      qtd= int.Parse(Console.ReadLine());
+
+
+      Carrinho_Compras.addCarrinho(cod,qtd,produtos[cod].getEstoque());
+
+      Console.Write("\n\nDeseja escolher mais produtos? 's' para escolher, 'n' para finalizar o pedido >> ");
+      continuar = Console.ReadLine();
     }
+
   }
 }

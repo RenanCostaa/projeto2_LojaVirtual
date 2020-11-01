@@ -1,41 +1,62 @@
+using System;
+using System.Collections.Generic;
+
 class Loja{
   //https://www.alura.com.br/artigos/listas-em-csharp
   //http://www.macoratti.net/17/06/c_listas1.htm
-  
-  //atributos
-  string produto;
-  double quantidade;
-  double preco;
 
-  //getters
-  string getProd(){
+	string produto;
+	double preco;
+	int estoque;
+
+	public Loja() {
+		produto = "Novo produto";
+		preco = 0.00;
+		estoque = 0;
+	}
+	public Loja(string p, int e, double pr) {
+		produto = p;
+		estoque = e;
+    preco = pr;
+	}
+
+	//getters
+  public string getProduto(){
     return produto;
   }
-  double getQuant(){
-    return quantidade;
+  public int getEstoque(){
+    return estoque;
   }
-  double getPreco(){
+  public double getPreco(){
     return preco;
   }
 
   //setters
   void setProd(string p){
-    produto=p;
+    produto = p;
   }
-  void setQuant(double q){
-    quantidade=q;
+  void setQuant(int q){
+    estoque = q;
   }
   void setPreco(double p){
-    preco=p;
+    preco = p;
   }
+  
+	/*
+  //atributos
+  string produto;
+  double quantidade;
+  double preco;
 
   //construtores
   public Loja(){
-
   }
   public Loja(string prod, double quant, double preco){
     produto=prod;
     quantidade=quant;
     this.preco=preco;
   }
+	*/
+  //metodos
+
 }
