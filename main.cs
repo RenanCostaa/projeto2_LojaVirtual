@@ -55,7 +55,7 @@ class MainClass {
 		for (int i=0; i<descricao.Count; i++) {
 			produtos.Add(new Loja(i+1,descricao[i], estoque[i], preco[i]));
 		}
-		
+		Console.Clear();
     Console.WriteLine("\n\nOlá! Para começarmos, faça seu cadastro:\n\n");
     
     //chamar cadastro de usuario
@@ -129,13 +129,15 @@ class MainClass {
       if (totalCarrinho <= cartaoUm.getLimite()){
         //aprovado
         Console.Clear();
+        Console.WriteLine("Compra aprovada!\n");
         Console.WriteLine("\n\n########## RECIBO ##########");
         for (int i=0; i<novoCarrinho.prodsCarrinho.Count; i++){
           produtos[novoCarrinho.prodsCarrinho[i].getCodigo()].setEstoque(produtos[novoCarrinho.prodsCarrinho[i].getCodigo()].getEstoque()-novoCarrinho.prodsCarrinho[i].getEstoque());
 
           Console.WriteLine("Prod.: {0} - Qtd.: {1} - R${2} ##", novoCarrinho.prodsCarrinho[i].getProduto(), novoCarrinho.prodsCarrinho[i].getEstoque(), novoCarrinho.prodsCarrinho[i].getPreco());
-					Console.WriteLine("Valor total: {0}\n\n", totalCarrinho);
         }
+        Console.WriteLine("\n\nValor total da compra: R${0}\n", totalCarrinho);
+        Console.WriteLine("Limite restante: R${0}",cartaoUm.getLimite()-totalCarrinho);
         aprovado=true;
       } else {
         //recusado
