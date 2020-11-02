@@ -53,11 +53,11 @@ class MainClass {
 
 		List<Loja> produtos = new List<Loja>();
 		for (int i=0; i<descricao.Count; i++) {
-			produtos.Add(new Loja(descricao[i], estoque[i], preco[i]));
+			produtos.Add(new Loja(i+1,descricao[i], estoque[i], preco[i]));
 		}
 		
     Console.WriteLine("\n\nOlá! Para começarmos, faça seu cadastro:\n\n");
-    /*
+    
     //chamar cadastro de usuario
     Console.Write("Digite o seu nome >> ");
     nome = Console.ReadLine();
@@ -68,13 +68,10 @@ class MainClass {
     Console.Write("Digite o seu Telefone >> ");
     telefone = Console.ReadLine();
     Cliente novoCliente = new Cliente(nome, cpf, endereco, telefone);
-    */
-    
-    //Carrinho_Compras novoCarrinho = new Carrinho_Compras(novoCliente.getNome());
-    Carrinho_Compras novoCarrinho = new Carrinho_Compras("renan");
+		//Cliente novoCliente = new Cliente("renan", "123", "endereco", "telefone");
+    Carrinho_Compras novoCarrinho = new Carrinho_Compras(novoCliente.getNome());
 
-    //Console.WriteLine("\n\nSeja bem-vindo(a) à nossa loja, {0}.\nConfira os nossos produtos:\n\n", novoCliente.getNome());
-    Console.WriteLine("\n\nSeja bem-vindo(a) à nossa loja,.\nConfira os nossos produtos:\n\n");
+    Console.WriteLine("\n\nSeja bem-vindo(a) à nossa loja, {0}.\nConfira os nossos produtos:\n\n", novoCliente.getNome());
     
     //vitrine de produtos
     string continuar = "s";
@@ -83,13 +80,9 @@ class MainClass {
       Console.WriteLine("Cód...Nome.................................Preço");
 			
       for (int i=0; i<produtos.Count; i++){
-        Console.WriteLine("Cod {0} - {1} - R${2} - Qtd.: {3} ", i+1, produtos[i].getProduto(),produtos[i].getPreco());
+        Console.WriteLine("Cod {0} - {1} - R${2} - Qtd.: {3}", produtos[i].getCodigo(), produtos[i].getProduto(),produtos[i].getPreco(), produtos[i].getEstoque());
       }
-      //selecao de item e quantidade
-
-      /*Temos que limitar o numero escolhido pelo usuário para
-      selecionar o produto (que tem o limite de 50 codigos) */
-      
+			
       Console.Write("\n\nEscolha um produto através do código >> ");
       cod= int.Parse(Console.ReadLine())-1;
 
@@ -100,7 +93,7 @@ class MainClass {
 				qtd= int.Parse(Console.ReadLine());
 				if (qtd <= produtos[cod].getEstoque()) {
 					valorProdCarrinho = produtos[cod].getPreco() * qtd;
-          produtoCarrinho = new Loja(produtos[cod].getProduto(), qtd, valorProdCarrinho);
+          produtoCarrinho = new Loja(cod, produtos[cod].getProduto(), qtd, valorProdCarrinho);
 					novoCarrinho.prodsCarrinho.Add(produtoCarrinho);
 				} else {
 					Console.WriteLine("Quantidade não disponível!");
@@ -113,9 +106,56 @@ class MainClass {
       continuar = Console.ReadLine();
     }
 
+		double totalCarrinho=0;
+		Console.WriteLine("\n\n*****Seu Carrinho*****");
 		for (int i=0; i<novoCarrinho.prodsCarrinho.Count; i++){
 			Console.WriteLine("Prod {0} - {1} - R${2} ", i+1, novoCarrinho.prodsCarrinho[i].getProduto(),novoCarrinho.prodsCarrinho[i].getPreco());
+      totalCarrinho+=novoCarrinho.prodsCarrinho[i].getPreco();
 		}
+		Console.WriteLine("*****Valor Total: {0}\n\n", totalCarrinho);
+
+		string numCartao, valCartao;
+		double limCartao;
+    bool aprovado=false;
+    while (!aprovado){
+      Console.Write("Digite o número do seu cartão >> ");
+      numCartao = Console.ReadLine();
+      Console.Write("Digite a validade do seu cartão >> ");
+      valCartao = Console.ReadLine();
+      Console.Write("Digite o limite do seu cartão >> ");
+      limCartao = double.Parse(Console.ReadLine());
+      Cartao cartaoUm = new Cartao(novoCliente, numCartao, valCartao, limCartao);
+
+      if (totalCarrinho <= cartaoUm.getLimite()){
+        //aprovado
+        Console.Clear();
+        Console.WriteLine("\n\n########## RECIBO ##########");
+        for (int i=0; i<novoCarrinho.prodsCarrinho.Count; i++){
+          produtos[novoCarrinho.prodsCarrinho[i].getCodigo()].setEstoque(produtos[novoCarrinho.prodsCarrinho[i].getCodigo()].getEstoque()-novoCarrinho.prodsCarrinho[i].getEstoque());
+
+          Console.WriteLine("Prod.: {0} - Qtd.: {1} - R${2} ##", novoCarrinho.prodsCarrinho[i].getProduto(), novoCarrinho.prodsCarrinho[i].getEstoque(), novoCarrinho.prodsCarrinho[i].getPreco());
+					Console.WriteLine("Valor total: {0}\n\n", totalCarrinho);
+        }
+        aprovado=true;
+      } else {
+        //recusado
+        Console.WriteLine("\n\nCompra recusada por falta de Limite!\n\n");
+      }
+
+    }
+
+		/*Console.WriteLine("*********************PRODUTOS***********************\n");
+		Console.WriteLine("Cód...Nome.................................Preço");
+		
+		for (int i=0; i<produtos.Count; i++){
+			Console.WriteLine("Cod {0} - {1} - R${2} - Qtd.: {3}", produtos[i].getCodigo(), produtos[i].getProduto(),produtos[i].getPreco(), produtos[i].getEstoque());
+		}*/
+
+    //CRIAR PAGAMENTO (APÓS PAGAMENTO CONFIRMADO REMOÇÃO DE ESTOQUE)
+		
+    /*
+    Console.WriteLine("*****Seu Carrinho*****");
+    */
 
   }
 }

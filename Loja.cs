@@ -5,6 +5,7 @@ class Loja{
   //https://www.alura.com.br/artigos/listas-em-csharp
   //http://www.macoratti.net/17/06/c_listas1.htm
 
+  int codigo;
 	string produto;
 	double preco;
 	int estoque;
@@ -14,7 +15,8 @@ class Loja{
 		preco = 0.00;
 		estoque = 0;
 	}
-	public Loja(string p, int e, double pr) {
+	public Loja(int c, string p, int e, double pr) {
+    codigo=c;
 		produto = p;
 		estoque = e;
     preco = pr;
@@ -30,6 +32,9 @@ class Loja{
   public double getPreco(){
     return preco;
   }
+	public int getCodigo(){
+    return codigo;
+  }
 
   //setters
   void setProd(string p){
@@ -41,7 +46,9 @@ class Loja{
   void setPreco(double p){
     preco = p;
   }
-  
+  public void setEstoque(int e){
+    estoque = e;
+  }
   //metodos
 
 }
