@@ -1,10 +1,12 @@
 class Cartao {
 
+	//atributos
 	private Cliente donoCartao;
 	private string numero;
 	private string validade;
 	private double limite;
 
+	//contrutores
 	public Cartao() {
 		numero = "0000.0000.0000.0000";
 		validade = "00/0000";
@@ -18,6 +20,7 @@ class Cartao {
 		limite = l;
 	}
 
+	//metodos
 	public double getLimite() {
 		return limite;
 	}

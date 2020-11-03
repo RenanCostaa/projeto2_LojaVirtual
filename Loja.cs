@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 
 class Loja{
-  //https://www.alura.com.br/artigos/listas-em-csharp
-  //http://www.macoratti.net/17/06/c_listas1.htm
 
+	//atributos
   int codigo;
 	string produto;
 	double preco;
 	int estoque;
 
+	//contrutores
 	public Loja() {
 		produto = "Novo produto";
 		preco = 0.00;
@@ -49,6 +49,7 @@ class Loja{
   public void setEstoque(int e){
     estoque = e;
   }
+	
   //metodos
 
 }

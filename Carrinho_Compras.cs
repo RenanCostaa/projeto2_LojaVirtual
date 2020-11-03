@@ -4,8 +4,6 @@ using System.Collections.Generic;
 class Carrinho_Compras{
   //atributos
   string dono;
-	/*List<int> produtos;
-	List<int> qtd;*/
 	public List<Loja> prodsCarrinho;
 
   //getters
@@ -23,14 +21,4 @@ class Carrinho_Compras{
     dono=d;
     prodsCarrinho = new List<Loja>();
   }
-
-  //metodos
-  /*public void addCarrinho(int cod, int quantd){
-    produtos.Add(cod);
-    qtd.Add(quantd);
-    Console.WriteLine("feito");
-  }*/
-
-
-
 }
